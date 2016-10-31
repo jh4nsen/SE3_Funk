@@ -30,28 +30,50 @@
 ;--- Aufgabe 2.2 ---
 ;AR=AlphaWinkel
 (define (AnfKurs A AA B BB)
-  (let ([AR (Grad (acos (/ (- (sin (Bogen B))(* (cos (Bogen(winkelDG A AA B BB)))(sin (Bogen A))))(* (cos A)(sin (winkelDG A AA B BB))))))])
+  (let ([AR (Grad (acos (/ (- (sin (Bogen B))(* (cos (Bogen(winkelDG A AA B BB)))(sin (Bogen A))))(* (cos (Bogen A))(sin (Bogen(winkelDG A AA B BB)))))))])
     (if (> (- BB AA) 0 ) AR (- 360 AR))))
-;--- Aufgabe 2.3 ---
+;--- Aufgabe 2.3.1 ---
+;G = Grad
 (define (Grad->Himmelsrichtung G)
-  (case (+ G)
-    [(and (<= 348.75)(> 11.25)) 'N]
-    [(and (<= 11.25)(> 33.75)) 'NNE]
-    [(and (<= 33.75)(> 56.25)) 'NE]
-    [(and (<= 56.25)(> 78.75)) 'ENE]
-    [(and (<= 78.75)(> 101.25)) 'E]
-    [(and (<= 101.25)(> 123.75)) 'ESE]
-    [(and (<= 123.75)(> 146.25)) 'SE]
-    [(and (<= 146.25)(> 168.75)) 'SSE]
-    [(and (<= 168.75)(> 191.25)) 'S]
-    [(and (<= 191.25)(> 213.75)) 'SSW]
-    [(and (<= 213.75)(> 236.25)) 'SW]
-    [(and (<= 236.25)(> 258.75)) 'WSW]
-    [(and (<= 258.75)(> 281.25)) 'W]
-    [(and (<= 281.25)(> 303.75)) 'WNW]
-    [(and (<= 303.75)(> 326.25)) 'NW]
-    [(and (<= 326.25)(> 348.75)) 'NNW]))
+  (cond
+    [(and (>= G 348.75)(<= G 360.0)) 'N]
+    [(and (>= G 0.0)(< G 11.25)) 'N]
+    [(and (>= G 11.25)(< G 33.75)) 'NNE]
+    [(and (>= G 33.75)(< G 56.25)) 'NE]
+    [(and (>= G 56.25)(< G 78.75)) 'ENE]
+    [(and (>= G 78.75)(< G 101.25)) 'E]
+    [(and (>= G 101.25)(< G 123.75)) 'ESE]
+    [(and (>= G 123.75)(< G 146.25)) 'SE]
+    [(and (>= G 146.25)(< G 168.75)) 'SSE]
+    [(and (>= G 168.75)(< G 191.25)) 'S]
+    [(and (>= G 191.25)(< G 213.75)) 'SSW]
+    [(and (>= G 213.75)(< G 236.25)) 'SW]
+    [(and (>= G 236.25)(< G 258.75)) 'WSW]
+    [(and (>= G 258.75)(< G 281.25)) 'W]
+    [(and (>= G 281.25)(< G 303.75)) 'WNW]
+    [(and (>= G 303.75)(< G 326.25)) 'NW]
+    [(and (>= G 326.25)(< G 348.75)) 'NNW]))
 
-;Oleg.Janke@hotmail.com
-;5Janke@inf
+;--- Aufgabe 2.3.2 ---
+;R = Symbol 'N | 'E | 'SSE etc..
+(define (Himmelsrichtung->Grad R)
+  (cond
+    [(eq? R 'N) 0]
+    [(eq? R 'NNE) 22.5]
+    [(eq? R 'NE) 45]
+    [(eq? R 'ENE) 67.5]
+    [(eq? R 'E) 90]
+    [(eq? R 'ESE) 112.5]
+    [(eq? R 'SE) 135]
+    [(eq? R 'SSE) 157.5]
+    [(eq? R 'S) 180]
+    [(eq? R 'SSW) 202.5]
+    [(eq? R 'SW) 225]
+    [(eq? R 'WSW) 247.5]
+    [(eq? R 'W) 270]
+    [(eq? R 'WNW) 292.5]
+    [(eq? R 'NW) 315]
+    [(eq? R 'NNW) 337.5]))
+    
+
     
