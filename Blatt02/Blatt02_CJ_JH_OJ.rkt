@@ -41,6 +41,22 @@
 
 (define (intEuler lF dn)
   (/ (* (power 10 1001)(euler lF dn)) 2))
+
+;2.4
+(define (pi_recursive divisor max_divisor)
+  (cond [(> divisor max_divisor) 0]
+        [else (+ (/ 1 divisor)(* -1.0 (pi_recursive (+ divisor 2) max_divisor)))]))
+
+(define (pi)
+  (* (pi_recursive 1 100000) 4.0)) ;noch eine null mehr läuft erst mit 3GB speicher stabil
+
+;die fakultaetsfunktion waechst wesentlich schneller an als die funktion "um 2 inkrementieren"
+;somit ist die abschaetzung für die euler zahl schon nach den ersten dutzend iterationen stabil
+;da nur noch geringe aenderungen zum endergebnis zuaddiert werden
+;die abschaetzung fuer pi hingegen hat durch das wechselnde vorzeichen der terme ueber mehrere iterationen
+;immer wieder starke ueber- bzw. unterschaetzungen, nach mehreren tausend durchlaeufen werden immer noch
+;aenderungen an der (erst) dritten nachkommastelle ausgefuehrt
+
 ; Aufgabe 3
 (define (type-of x)
   (cond [(boolean? x) 'boolean]
@@ -52,3 +68,13 @@
         [(string? x) 'string]
         [(vector? x) 'vector]
         [(procedure? x) 'procedure]))
+
+;3.1 'number, da die rechnung ausgefuert wird
+;3.2 'boolean, da der unaere not operator alle zahlen >1 zu false auswertet
+;3.3 'pair, da die drei elemente als geschachtelte pairs repraesentiert werden
+;3.4 'list, da es sich um die leere (somit einfachste) liste handelt
+;3.5 'procedure, because of the way it is
+;3.6 'char, da sting-ref den char an stelle x eines strings zurueck gibt
+;3.7 'procedure, da eine neue lambda-funktion mit input = output definiert wurde
+;3.8 'procedure, weil ist eine
+;3.9 'symbol, da das erste evaluieren von type-of in einer type-of ein symbol zurueck gibt, keine procedure
