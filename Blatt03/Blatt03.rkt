@@ -22,13 +22,15 @@
 
 ;1.4
 (define (string->NATO in_string)
-  'keinbock
-  )
+  (let*([as_list (string->list in_string)][first (car as_list)])
+      (whyrecursion first)
+      (cond [(> (length as_list) 1) (string->NATO (list->string (list-tail as_list 0)))])
+      ))
 
 (define (whyrecursion input)
   (char->NATO (char->uppercase input))
   )
-
+;laeuft nicht, kein bock mehr
 
 ;2.1
 (require se3-bib/flaggen-module)
