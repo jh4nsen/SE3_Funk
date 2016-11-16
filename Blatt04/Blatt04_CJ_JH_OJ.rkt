@@ -14,13 +14,27 @@
 ;7. (cons ’Paare ’auch)  ->  '(Paare . auch)
 ;8. (equal? (list ’Racket ’Prolog ’Java) ’(Racket Prolog Java))  ->  #T
 ;9. (eq? (list ’Racket ’Prolog ’Java) (cons ’Racket ’(Prolog Java)))  ->  #F
-(require racket/include)
-(include "blatt03.rkt")
+;(require racket/include)
+;(include "Blatt03.rkt")
+(require "Blatt03.rkt")
+(require se3-bib/tools-module)
 ;Aufgabe 2
-(define (headline)
-  "MAYDAY MAYDAY MAYDAY" (hereIs))
-(define (hereIs)
-  (string->NATOStr "DE"))
+(define (headline shipname rufzeichen)
+  (display (string-append "MAYDAY MAYDAY MAYDAY\n" (string->NATOStr "DE") shipname " " shipname " " shipname " " (string->NATOStr rufzeichen)
+                          "\nMAYDAY " shipname " " (string->NATOStr shipname) "\nIch buchstabiere " (string->NATOStr rufzeichen) "\n")))
+(define (place)
+  (display (string-append "Notfallposition:"(car(one-of '(" Bermuda Dreieck\n" " Leuchtturm Kiel\n" " Kap hoorn\n" " Freibad\n"))))))
+
+(define (emergency artNot)
+  (display (string-append "Wir haben einen Notfall! " artNot " ")))
+
+(define (furtherInstr hilfeLeist)
+  (cond [(non-empty-string? hilfeLeist) (display "Sonst keine Probleme.")]
+        [(display  (string-append "Wir benötigen folgende Hilfeleistungen" hilfeLeist))]))
+
+(define (signature shipname rufzeichen)
+  (display (string-append shipname " " (string->NATOStr rufzeichen))))
 
 (define (notfallsignal shipname rufzeichen artNot hilfeLeist)
-  (headline))
+  (headline shipname rufzeichen)
+  (place)(emergency artNot)(furtherInstr hilfeLeist)(display "\n----\n")(signature shipname rufzeichen)(display "\nOVER"))
