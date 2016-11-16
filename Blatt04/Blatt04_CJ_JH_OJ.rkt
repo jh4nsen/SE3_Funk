@@ -1,0 +1,26 @@
+#lang racket
+;Übungsgruppe 04 - Mittwoche 8:15-9:45
+;Christopher Jarsembinski 6700490
+;Julius Hansen 6455291
+;Oleg Janke 6834837
+
+;Aufgabe 1
+;1. (max (min 2 (- 2 5)) 0)  ->  0
+;2. ’(+ (- 2 13) 11)  ->  ’(+ (- 2 13) 11)
+;3. (cadr ’(Alle Jahre wieder))  ->  ’Jahre
+;4. (cddr ’(kommt (das Weihnachtfest)))  ->  'Weihnachtsfest
+;5. (cdadr ’(kommt (das . Weihnachtfest)))  ->  '()
+;6. (cons ’Listen ’(ganz einfach und))  ->  '(Listen . (ganz einfach und))
+;7. (cons ’Paare ’auch)  ->  '(Paare . auch)
+;8. (equal? (list ’Racket ’Prolog ’Java) ’(Racket Prolog Java))  ->  #T
+;9. (eq? (list ’Racket ’Prolog ’Java) (cons ’Racket ’(Prolog Java)))  ->  #F
+(require racket/include)
+(include "blatt03.rkt")
+;Aufgabe 2
+(define (headline)
+  "MAYDAY MAYDAY MAYDAY" (hereIs))
+(define (hereIs)
+  (string->NATOStr "DE"))
+
+(define (notfallsignal shipname rufzeichen artNot hilfeLeist)
+  (headline))
