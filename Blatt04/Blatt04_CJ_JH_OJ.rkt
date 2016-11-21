@@ -18,7 +18,28 @@
 ;(include "Blatt03.rkt")
 (require "Blatt03.rkt")
 (require se3-bib/tools-module)
-;Aufgabe 2
+
+;Aufgabe 2.1
+;;<Notmeldung> ::= <Ueberschrift><Standort><Notfallart><Hilfeleistungen><Peilzeichen><Signatur><Sendeschluss>
+;;<Ueberschrift> ::= <Notzeichen><Notzeichen><Notzeichen>"DELTA ECHO "<Name><Name><Name><Rufzeichen><Notzeichen><Name-buchstabiert><Rufzeichen>
+;;<Notzeichen> ::= "MAYDAY"
+;;<Name> ::= <Buchstabe> | <Buchstabe><Name>
+;;<Buchstabe> ::= schreibichjetzthiernichtalleshin
+;;<Rufzeichen> ::= <Buchstabe> | <Buchstabe><Leer><Rufzeichen>
+;;<Leer> ::= " "
+;;<Name-buchstabiert> ::= <Buchstabe> | <Buchstabe><Leer><Name-buchstabiert>
+;;<Standort> ::= "Ort"
+;;<Notfallart> ::= <Notfallzeit>"Notfallart"<Notfalldetails>
+;;<Notfallzeit> ::= "Notfallzeit "<Ziffer><Ziffer><Ziffer><Ziffer><Zeitzone> | ""
+;;<Ziffer> ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "0"
+;;<Zeitzone> ::= "UTC" | "GMT" | whatever
+;;<Notfalldetails> ::= "Details" | "Details"<Notfalldetails>| ""
+;;<Hilfeleistungen> ::= "Hilfeleistungen" | "Hilfeleistungen"<Hilfeleistungen>
+;;<Peilzeichen> ::= "Sende Peilzeichen" "- -"
+;;<Signatur> ::= <Name><Rufzeichen>
+;;<Sendeschluss> ::= "OVER" | "blubb"
+
+;2.2
 (define (headline shipname rufzeichen)
   (display (string-append "MAYDAY MAYDAY MAYDAY\n" (string->NATOStr "DE") "\n" shipname " " shipname " " shipname " " (string->NATOStr rufzeichen)
                           "\nMAYDAY " shipname " Ich buchstabiere " (string->NATOStr shipname) "\nRufzeichen " (string->NATOStr rufzeichen) "\n")))
@@ -29,7 +50,7 @@
   (display (string-append "Wir haben einen Notfall \n" artNot "\n")))
 
 (define (furtherInstr hilfeLeist)
-  (cond [(non-empty-string? hilfeLeist)(display string-append "Wir benötigen folgende Hilfeleistungen \n" hilfeLeist)]
+  (cond [(non-empty-string? hilfeLeist)(display (string-append "Wir benötigen folgende Hilfeleistungen \n" hilfeLeist))]
         [(display "Keine weiteren Angaben zu Hilfeleistungen")]))
 
 (define (signature shipname rufzeichen)
@@ -39,6 +60,7 @@
   (headline shipname rufzeichen)
   (place ort)(emergency artNot)(furtherInstr hilfeLeist)(display " ----\n")(signature shipname rufzeichen)(display "\nOVER"))
 
+;2.3
 ;;Tests zu Seaside und Amira :
 (define (test shipname)
   (cond [(string=? shipname "SEASIDE")(notfallsignal "SEASIDE" "SSDE" "UNGEFÄHR 10 SM NORDÖSTLICH LEUCHTTURM KIEL"
