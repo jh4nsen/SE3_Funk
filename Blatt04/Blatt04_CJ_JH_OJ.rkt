@@ -5,15 +5,14 @@
 ;Oleg Janke 6834837
 
 ;Aufgabe 1
-;1. (max (min 2 (- 2 5)) 0)  ->  0
-;2. ’(+ (- 2 13) 11)  ->  ’(+ (- 2 13) 11)
+;1. (max (min 5 (- 6 7)) 8)  ->  8
+;2. ’(+ (- 11 13) 17)  ->  ’(+ (- 11 13) 17)
 ;3. (cadr ’(Alle Jahre wieder))  ->  ’Jahre
-;4. (cddr ’(kommt (das Weihnachtfest)))  ->  'Weihnachtsfest
-;5. (cdadr ’(kommt (das . Weihnachtfest)))  ->  '()
-;6. (cons ’Listen ’(ganz einfach und))  ->  '(Listen . (ganz einfach und))
-;7. (cons ’Paare ’auch)  ->  '(Paare . auch)
-;8. (equal? (list ’Racket ’Prolog ’Java) ’(Racket Prolog Java))  ->  #T
-;9. (eq? (list ’Racket ’Prolog ’Java) (cons ’Racket ’(Prolog Java)))  ->  #F
+;4. (cddr '(kommt (das Christuskind))))  ->  '(Christuskind)
+;5. (cons  'Auf '(die Erde nieder))  ->   'Auf . '(die Erde nieder))
+;6. (cons 'Wo 'wir)  ->  '(wo . wir)
+;7. (equal? (list 'Menschen 'sind) '(Menschen sind))  ->  #T
+;8. (eq? (list 'Rudolph 'Das 'Rentier) (cons 'Rudolph '(Das Rentier)))  ->  #F
 ;(require racket/include)
 ;(include "Blatt03.rkt")
 (require "Blatt03.rkt")
@@ -70,3 +69,38 @@
                "NOTFALLZEIT 0640 UTC UTC \nKENTERUNG IN SCHWERER SEE\nNEUN MANN AN BORD\nDAS SCHIFF IST 15M LANG UND HAT EINEN GRÜNEN RUMPF"
                "")]))
 
+;3.1
+;; Innere Reduktion: Terme werden hier von innen nach außen auswertet
+
+;; Beispiel:
+;;    (hoch4 (* 3 (+ 1 (hoch4 2))))
+;; -> (hoch4 (* 3 (+ 1 (* 2 2 2 2))))
+;; -> (hoch4 (* 3 (+ 1 16))))
+;; -> (hoch4 (* 3 17))
+;; -> (hoch4 51)
+;; -> (* 51 51 51 51)
+;; -> 6765201
+
+;; Äußere Reduktion: Terme werden von außen nach innen ausgewertet
+
+;;    (hoch4 (* 3 (+ 1 (hoch4 2))))
+;; -> (* (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))))
+;; -> (* (* 3 (+ 1 (* 2 2 2 2))) (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))))
+;; -> (* (* 3 (+ 1 16)) (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))));; -> (* (* 3        17        ) (* 3 (+ 1  (hoch4 2) )) (* 3 (+ 1  (hoch4 2) )) (* 3 (+ 1  (hoch4 2) )))
+;; -> (* 51 (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))))
+;; -> (* 51 (* 3 (+ 1 (* 2 2 2 2))) (* 3 (+ 1 (hoch4 2))) (3 (+ 1 (hoch4 2)))
+;; -> (* 51 (* 3 (+ 1 16)) (* 3 (+ 1 (hoch4 2))) (3 (+ 1 (hoch4 2))))
+;; -> (* 51 (* 3 17) (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))))
+;; -> (* 51 51 (* 3 (+ 1 (hoch4 2))) (* 3 (+ 1 (hoch4 2))))
+;; -> (* 51 51 (* 3 (+ 1 (* 2 2 2 2))) (* 3 (+ 1 (hoch4 2))))
+;; -> (* 51 51 (* 3 (+ 1 16)) (* 3 (+ 1 (hoch4 2))))
+;; -> (* 51 51 (* 3 17) (* 3 (+ 1 (hoch4 2))))
+;; -> (* 51 51 51 (* 3 (+ 1 (hoch4 2))))
+;; -> (* 51 51 51 (* 3 (+ 1 (* 2 2 2 2))))
+;; -> (* 51 51 51 (* 3 (+ 1 16)))
+;; -> (* 51 51 51 (* 3 17))
+;; -> (* 51 51 51 51)
+;; -> 6765201
+
+;3.2
+;; Für Funktionen wird in Racket die innere Reduktion als Reduktionsstrategie angewendet, für Special forms hingegen wird in Racket äußere Reduktion verwendet.
