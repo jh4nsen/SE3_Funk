@@ -103,4 +103,11 @@
 ;; -> 6765201
 
 ;3.2
-;; Für Funktionen wird in Racket die innere Reduktion als Reduktionsstrategie angewendet, für Special forms hingegen wird in Racket äußere Reduktion verwendet.
+;; Für Funktionen wird in Racket die innere Reduktion als Reduktionsstrategie angewendet, für Special forms hingegen wird 
+;; in Racket äußere Reduktion verwendet.
+
+;3.3
+;; Wenn Alyssa versucht das Programm mit der Eigenen Funktion new-if zu benutzen, entsteht ein Fehler da für eigene Funtion
+;; innere Reduktion angewendet wird und somit werden die 3 Argumente zuerst ausgewertet wodurch eine Endlosschleife im Else-clause
+;; des faculty entsteht.
+;; Mit einer special form lässt sich dies vermeiden, da zuerst die Abbruchbedingung geprüft wird bevor die Rekursion einsetzt.
