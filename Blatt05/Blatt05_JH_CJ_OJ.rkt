@@ -16,3 +16,8 @@
 ;Darstellungsfunktion für abbildung
 
 ;Implementation
+
+(define pattern(list "stars" "dots" "stripes"))
+(define color(list "green" "red" "blue" "yellow"))
+(define antenna(list "bend" "curly" "straight"))
+(define wings(list "rhomb" "ellipse" "hexagon"))
