@@ -21,3 +21,25 @@
 (define color(list "green" "red" "blue" "yellow"))
 (define antenna(list "bend" "curly" "straight"))
 (define wings(list "rhomb" "ellipse" "hexagon"))
+
+(define (domRez in_list)
+  (cond [(member car(in_list) pattern) sort(in_list pattern)]
+        [(member car(in_list) color) sort(in_list color)]
+        [(member car(in_list) antenna) sort(in_list antenna)]
+        [(member car(in_list) wings) sort(in_list wings)]
+        )
+  )
+
+(define (sort in_list feature)
+  (cond [(> index-of(feature car(in_list)) index-of(feature cdr(in_list))) in_list]
+        [else reverse(in_list)]
+        )
+  )
+
+(define (index-of list element)
+  (let loop ((list list)
+             (x 0))
+    (cond ((empty? list) #f)
+          ((equal? (first list) element) x)
+          (else (loop (rest list) (add1 x))))))
+                                    
