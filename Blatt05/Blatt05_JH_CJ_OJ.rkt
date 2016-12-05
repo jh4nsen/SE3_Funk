@@ -70,6 +70,9 @@
     )
   )
 
+;Mehrere Kinder
 (define (mendel-plural father mother number)
-
+  (cond [(equal? number 0) (mendel-uno father mother)]
+        [else (mendel-uno father mother)(mendel-plural father mother (- number 1))]
+        )
   )
