@@ -23,16 +23,16 @@
 (define wings(list "rhomb" "ellipse" "hexagon"))
 
 (define (domRez in_list)
-  (cond [(not(empty?(member (list-ref in_list 0) pattern))) sort(in_list pattern)]
-        [(not(empty?(member (list-ref in_list 0) color))) sort(in_list color)]
-        [(not(empty?(member (list-ref in_list 0) antenna))) sort(in_list antenna)]
-        [(not(empty?(member (list-ref in_list 0) wings))) sort(in_list wings)]
+  (cond [(not(boolean?(member (list-ref in_list 0) pattern))) (sort in_list pattern)]
+        [(not(boolean?(member (list-ref in_list 0) color))) (sort in_list color)]
+        [(not(boolean?(member (list-ref in_list 0) antenna))) (sort in_list antenna)]
+        [(not(boolean?(member (list-ref in_list 0) wings))) (sort in_list wings)]
         )
   )
 
 (define (sort in_list feature)
-  (cond [(> index-of(feature (list-ref in_list 0)) index-of(feature (list-ref in_list 1))) in_list]
-        [else reverse(in_list)]
+  (cond [(< (index-of feature (list-ref in_list 0)) (index-of feature (list-ref in_list 1))) in_list]
+        [else (reverse in_list)]
         )
   )
 
