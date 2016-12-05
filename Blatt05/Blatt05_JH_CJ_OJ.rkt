@@ -17,10 +17,10 @@
 
 ;Implementation
 
-(define pattern(list "stars" "dots" "stripes"))
-(define color(list "green" "red" "blue" "yellow"))
-(define antenna(list "bend" "curly" "straight"))
-(define wings(list "rhomb" "ellipse" "hexagon"))
+(define pattern(list 'stars 'dots 'stripes))
+(define color(list 'green 'red 'blue 'yellow))
+(define antenna(list 'curved 'curly 'straight))
+(define wings(list 'rhomb 'ellipse 'hexagon))
 
 (define (domRez in_list)
   (cond [(not(boolean?(member (list-ref in_list 0) pattern))) (sort in_list pattern)]
