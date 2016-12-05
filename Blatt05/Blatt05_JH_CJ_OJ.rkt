@@ -59,6 +59,11 @@
 (define ursel(list (list 'red 'blue)(list 'stars 'stripes)(list 'curly 'straight)(list 'ellipse 'hexagon)))
 (define horst(list (list 'green 'green)(list 'dots 'stripes)(list 'curly 'curved)(list 'rhomb 'hexagon)))
 
+(define random-father(list (list (random-element color)(random-element color))(list (random-element pattern)(random-element pattern))
+                           (list (random-element antenna)(random-element antenna))(list (random-element wings)(random-element wings))))
+(define random-mother(list (list (random-element color)(random-element color))(list (random-element pattern)(random-element pattern))
+                           (list (random-element antenna)(random-element antenna))(list (random-element wings)(random-element wings))))
+
 ;Erzeugt einen neuen Schmetterling, erwartet zwei Eltern als Listen von Listen
 (define (mendel-uno father mother)
   (let ((child-color (list (random-element(list-ref father 0)) (random-element(list-ref mother 0))))
