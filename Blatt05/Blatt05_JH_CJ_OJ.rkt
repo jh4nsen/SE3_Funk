@@ -22,6 +22,7 @@
 (define antenna(list 'curved 'curly 'straight))
 (define wings(list 'rhomb 'ellipse 'hexagon))
 
+;Merkmaltupel sortieren - Ziel: (Dominant,Rezessiv)
 (define (domRez in_list)
   (cond [(not(boolean?(member (list-ref in_list 0) pattern))) (sort in_list pattern)]
         [(not(boolean?(member (list-ref in_list 0) color))) (sort in_list color)]
@@ -43,6 +44,7 @@
           ((equal? (first list) element) x)
           (else (loop (rest list) (add1 x))))))
 
+;Vererbung der Merkmale
 ;gibt ein zufälliges Listenelement zurück
 (define (random-element in_list)
   (let ((len(length in_list)))
@@ -53,10 +55,11 @@
 
 (require se3-bib/se3-bib/butterfly-module) ;TODO: pfad lokal fixen...
 
+;Beispielschmetterlinge
 (define ursel(list (list 'red 'blue)(list 'stars 'stripes)(list 'curly 'straight)(list 'ellipse 'hexagon)))
 (define horst(list (list 'green 'green)(list 'dots 'stripes)(list 'curly 'curved)(list 'rhomb 'hexagon)))
 
-;Erzeugt eine neue Mücke, erwartet zwei Eltern als Listen von Listen
+;Erzeugt einen neuen Schmetterling, erwartet zwei Eltern als Listen von Listen
 (define (mendel-uno father mother)
   (let ((child-color (list (random-element(list-ref father 0)) (random-element(list-ref mother 0))))
         (child-pattern (list (random-element(list-ref father 1)) (random-element(list-ref mother 1))))
