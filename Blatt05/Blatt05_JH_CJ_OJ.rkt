@@ -66,18 +66,23 @@
 
 ;Erzeugt einen neuen Schmetterling, erwartet zwei Eltern als Listen von Listen
 (define (mendel-uno father mother)
+>>>>>>> origin/master
   (let ((child-color (list (random-element(list-ref father 0)) (random-element(list-ref mother 0))))
         (child-pattern (list (random-element(list-ref father 1)) (random-element(list-ref mother 1))))
         (child-antenna (list (random-element(list-ref father 2)) (random-element(list-ref mother 2))))
         (child-wings (list (random-element(list-ref father 3)) (random-element(list-ref mother 3))))
         )
-    (show-butterfly (list-ref(domRez child-color)0)(list-ref(domRez child-pattern)0)(list-ref(domRez child-antenna)0)(list-ref(domRez child-wings)0))
+    (cond [(equal? rekursiv 0)(show-butterfly (list-ref(domRez child-color)0)(list-ref(domRez child-pattern)0)(list-ref(domRez child-antenna)0)(list-ref(domRez child-wings)0))]
+          ;vllt. eine Klammer zu viel um schmetterlinge, bitte einmal testen
+          [(equal? rekursiv 1) '((list-ref(domRez child-color)0)(list-ref(domRez child-pattern)0)(list-ref(domRez child-antenna)0)(list-ref(domRez child-wings)0))] ;vllt. eine Klammer zu viel um schmetterlinge, bitte einmal testen
+          )
+    ;(show-butterfly (list-ref(domRez child-color)0)(list-ref(domRez child-pattern)0)(list-ref(domRez child-antenna)0)(list-ref(domRez child-wings)0))  Alter Krams
     )
   )
 
-;Mehrere Kinder
-(define (mendel-plural father mother number)
-  (cond [(equal? number 0) (mendel-uno father mother)]
-        [else (mendel-uno father mother)(mendel-plural father mother (- number 1))]
+;Mehrere Kinder - Schmetterlinge mit '() initialisieren
+(define (mendel-plural father mother number schmetterlinge)
+  (cond [(equal? number 0) (cons schmetterlinge (mendel-uno father mother 1)) (map show-butterfly schmetterlinge)]
+        [else (cons schmetterlinge (mendel-uno father mother 1))(mendel-plural father mother (- number 1) schmetterlinge)]
         )
   )
