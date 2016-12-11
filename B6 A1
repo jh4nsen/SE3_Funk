@@ -1,0 +1,6 @@
+Blatt 6 Aufg. 1
+
+Kopfstueck: Linear, da sie den Stack danach zusammenbaut mit Kons, also wieder aufsteigt.
+Endstueck: Endrekursiv, das am Ende die Restliste zurückgegeben wird, die nach n-Schritten überbleibt.
+Merge: Baumrekursion, da am Ende 2 Neue Stränge verfolgt werden, die wieder zusammengeführt werden.
+merge-sort: Ist Baumrekursiv, aber die aufrufe zu kopf-/endstueck sind 2 linear und endrekursiv und der Merge aufruf Baumrekursiv. VIele Rekursionen in einer Rekursion.
